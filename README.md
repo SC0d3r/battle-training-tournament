@@ -94,6 +94,7 @@ node bt-tournament.mjs [controllers...] [options]
 
 - Node's JIT runs controller code roughly 15–20× faster than the ladder's QuickJS. Use the official `local-test.mjs --profile` for the per-tick budget; this harness measures strength, not timing.
 - With `--max-ticks`, a truncated match counts as a draw. That is useful for fast tests, not for real rankings.
+- Mirrored games are dependent: each seed is played twice with the sides swapped, so the two games share a map and are not independent samples. The bootstrap resamples individual games, which makes the Elo interval a little narrower than a strict cluster bootstrap by (pairing, seed) would. Treat overlapping intervals as "not clearly separated" rather than as a formal test.
 - House bots are fixed at their usual seed (`seed: 7`) and are not tuned; they are a panel, not a ladder snapshot.
 - The public ladder is the final judge. This tool tells you what to expect before you upload.
 
