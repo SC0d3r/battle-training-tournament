@@ -1,0 +1,25 @@
+{
+  "name": "bt-tournament",
+  "version": "1.0.0",
+  "description": "Multi-controller tournament and tuning harness for battle.training: round robin, mirrored sides, Elo with bootstrap intervals, head-to-head matrix, HTML report.",
+  "type": "module",
+  "bin": {
+    "bt-tournament": "./bt-tournament.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node bt-tournament.mjs --controllers examples/controller-starter.js --vs brawler,holder,random,hunter --seeds 4 --verify 4 --out examples"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "battle.training",
+    "tournament",
+    "elo",
+    "bradley-terry",
+    "benchmark",
+    "ai-agents"
+  ],
+  "license": "MIT"
+}

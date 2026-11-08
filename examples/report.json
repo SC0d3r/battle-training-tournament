@@ -1,0 +1,1146 @@
+{
+  "meta": {
+    "harness": "bt-tournament 1.0.0",
+    "generatedAt": "2026-11-08T09:19:29.496Z",
+    "engine": "0.1.0",
+    "rules": {
+      "version": "s2.0.0",
+      "hash": "32ce8c36247ff67d"
+    },
+    "command": "node bt-tournament.mjs --controllers examples/controller-starter.js --vs brawler,holder,random,hunter --seeds 4 --workers 4 --verify 4 --out examples",
+    "config": {
+      "seeds": 4,
+      "seedList": [
+        2654435761,
+        1013904226,
+        3668339987,
+        2027808452
+      ],
+      "family": null,
+      "workers": 4,
+      "bootstrap": 300,
+      "maxTicks": null
+    }
+  },
+  "participants": [
+    {
+      "id": 0,
+      "name": "controller-starter",
+      "kind": "controller",
+      "version": "sha256:dddf8145d3fc"
+    },
+    {
+      "id": 1,
+      "name": "house-brawler",
+      "kind": "house",
+      "version": "house-brawler"
+    },
+    {
+      "id": 2,
+      "name": "house-holder",
+      "kind": "house",
+      "version": "house-holder"
+    },
+    {
+      "id": 3,
+      "name": "house-random",
+      "kind": "house",
+      "version": "house-random"
+    },
+    {
+      "id": 4,
+      "name": "house-hunter",
+      "kind": "house",
+      "version": "house-hunter"
+    }
+  ],
+  "totals": {
+    "planned": 80,
+    "played": 80,
+    "failed": 0,
+    "draws": 0,
+    "verified": 4,
+    "verifyFailed": 0
+  },
+  "standings": [
+    {
+      "id": 0,
+      "name": "controller-starter",
+      "kind": "controller",
+      "version": "sha256:dddf8145d3fc",
+      "games": 32,
+      "wins": 20,
+      "losses": 12,
+      "draws": 0,
+      "damageDealt": 5311,
+      "damageTaken": 6158,
+      "refused": 0,
+      "tickErrors": 0,
+      "firstError": null,
+      "score": 0.625,
+      "scoreCI": [
+        0.4525440735307745,
+        0.7706611269054578
+      ],
+      "elo": 1595.0920907346886,
+      "eloCI": [
+        1472.3125328975736,
+        1721.8508642418522
+      ]
+    },
+    {
+      "id": 1,
+      "name": "house-brawler",
+      "kind": "house",
+      "version": "house-brawler",
+      "games": 32,
+      "wins": 16,
+      "losses": 16,
+      "draws": 0,
+      "damageDealt": 8075,
+      "damageTaken": 5060,
+      "refused": 0,
+      "tickErrors": 0,
+      "firstError": null,
+      "score": 0.5,
+      "scoreCI": [
+        0.3363088286932748,
+        0.6636911713067252
+      ],
+      "elo": 1513.299828025497,
+      "eloCI": [
+        1417.7904119784546,
+        1627.964836131685
+      ]
+    },
+    {
+      "id": 2,
+      "name": "house-holder",
+      "kind": "house",
+      "version": "house-holder",
+      "games": 32,
+      "wins": 27,
+      "losses": 5,
+      "draws": 0,
+      "damageDealt": 4984,
+      "damageTaken": 6494,
+      "refused": 0,
+      "tickErrors": 0,
+      "firstError": null,
+      "score": 0.84375,
+      "scoreCI": [
+        0.6824585040246961,
+        0.931355797174943
+      ],
+      "elo": 1739.6325452826454,
+      "eloCI": [
+        1640.0996024494975,
+        1847.6442126824106
+      ]
+    },
+    {
+      "id": 3,
+      "name": "house-random",
+      "kind": "house",
+      "version": "house-random",
+      "games": 32,
+      "wins": 3,
+      "losses": 29,
+      "draws": 0,
+      "damageDealt": 4816,
+      "damageTaken": 9644,
+      "refused": 5120,
+      "tickErrors": 0,
+      "firstError": null,
+      "score": 0.09375,
+      "scoreCI": [
+        0.0324015512983662,
+        0.24218154728387864
+      ],
+      "elo": 1180.7649975989466,
+      "eloCI": [
+        819.6881627987256,
+        1309.8522636147832
+      ]
+    },
+    {
+      "id": 4,
+      "name": "house-hunter",
+      "kind": "house",
+      "version": "house-hunter",
+      "games": 32,
+      "wins": 14,
+      "losses": 18,
+      "draws": 0,
+      "damageDealt": 10989,
+      "damageTaken": 6819,
+      "refused": 1,
+      "tickErrors": 0,
+      "firstError": null,
+      "score": 0.4375,
+      "scoreCI": [
+        0.28165331115040365,
+        0.6067440886314801
+      ],
+      "elo": 1471.2105383582225,
+      "eloCI": [
+        1359.9052046489458,
+        1594.813139896858
+      ]
+    }
+  ],
+  "matchups": [
+    {
+      "a": 0,
+      "b": 1,
+      "games": 8,
+      "aWins": 6,
+      "draws": 0,
+      "bWins": 2,
+      "aName": "controller-starter",
+      "bName": "house-brawler",
+      "aScore": 0.75,
+      "aScoreCI": [
+        0.40927543031016894,
+        0.928520787247891
+      ]
+    },
+    {
+      "a": 0,
+      "b": 2,
+      "games": 8,
+      "aWins": 2,
+      "draws": 0,
+      "bWins": 6,
+      "aName": "controller-starter",
+      "bName": "house-holder",
+      "aScore": 0.25,
+      "aScoreCI": [
+        0.07147921275210901,
+        0.5907245696898311
+      ]
+    },
+    {
+      "a": 0,
+      "b": 3,
+      "games": 8,
+      "aWins": 7,
+      "draws": 0,
+      "bWins": 1,
+      "aName": "controller-starter",
+      "bName": "house-random",
+      "aScore": 0.875,
+      "aScoreCI": [
+        0.5291118177871466,
+        0.9775825085499433
+      ]
+    },
+    {
+      "a": 0,
+      "b": 4,
+      "games": 8,
+      "aWins": 5,
+      "draws": 0,
+      "bWins": 3,
+      "aName": "controller-starter",
+      "bName": "house-hunter",
+      "aScore": 0.625,
+      "aScoreCI": [
+        0.3057423946026273,
+        0.8631557141764027
+      ]
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "games": 8,
+      "aWins": 1,
+      "draws": 0,
+      "bWins": 7,
+      "aName": "house-brawler",
+      "bName": "house-holder",
+      "aScore": 0.125,
+      "aScoreCI": [
+        0.022417491450056667,
+        0.47088818221285345
+      ]
+    },
+    {
+      "a": 1,
+      "b": 3,
+      "games": 8,
+      "aWins": 7,
+      "draws": 0,
+      "bWins": 1,
+      "aName": "house-brawler",
+      "bName": "house-random",
+      "aScore": 0.875,
+      "aScoreCI": [
+        0.5291118177871466,
+        0.9775825085499433
+      ]
+    },
+    {
+      "a": 1,
+      "b": 4,
+      "games": 8,
+      "aWins": 6,
+      "draws": 0,
+      "bWins": 2,
+      "aName": "house-brawler",
+      "bName": "house-hunter",
+      "aScore": 0.75,
+      "aScoreCI": [
+        0.40927543031016894,
+        0.928520787247891
+      ]
+    },
+    {
+      "a": 2,
+      "b": 3,
+      "games": 8,
+      "aWins": 8,
+      "draws": 0,
+      "bWins": 0,
+      "aName": "house-holder",
+      "bName": "house-random",
+      "aScore": 1,
+      "aScoreCI": [
+        0.6755924351161198,
+        1
+      ]
+    },
+    {
+      "a": 2,
+      "b": 4,
+      "games": 8,
+      "aWins": 6,
+      "draws": 0,
+      "bWins": 2,
+      "aName": "house-holder",
+      "bName": "house-hunter",
+      "aScore": 0.75,
+      "aScoreCI": [
+        0.40927543031016894,
+        0.928520787247891
+      ]
+    },
+    {
+      "a": 3,
+      "b": 4,
+      "games": 8,
+      "aWins": 1,
+      "draws": 0,
+      "bWins": 7,
+      "aName": "house-random",
+      "bName": "house-hunter",
+      "aScore": 0.125,
+      "aScoreCI": [
+        0.022417491450056667,
+        0.47088818221285345
+      ]
+    }
+  ],
+  "games": [
+    {
+      "job": 0,
+      "seed": 2654435761,
+      "a": 0,
+      "b": 1,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4766,
+      "verified": true
+    },
+    {
+      "job": 1,
+      "seed": 2654435761,
+      "a": 1,
+      "b": 0,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4760,
+      "verified": null
+    },
+    {
+      "job": 2,
+      "seed": 1013904226,
+      "a": 0,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4561,
+      "verified": null
+    },
+    {
+      "job": 3,
+      "seed": 1013904226,
+      "a": 1,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4701,
+      "verified": null
+    },
+    {
+      "job": 4,
+      "seed": 3668339987,
+      "a": 0,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4661,
+      "verified": null
+    },
+    {
+      "job": 5,
+      "seed": 3668339987,
+      "a": 1,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 6,
+      "seed": 2027808452,
+      "a": 0,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4755,
+      "verified": null
+    },
+    {
+      "job": 7,
+      "seed": 2027808452,
+      "a": 1,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4748,
+      "verified": null
+    },
+    {
+      "job": 8,
+      "seed": 2654435761,
+      "a": 0,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4778,
+      "verified": null
+    },
+    {
+      "job": 9,
+      "seed": 2654435761,
+      "a": 2,
+      "b": 0,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4693,
+      "verified": null
+    },
+    {
+      "job": 10,
+      "seed": 1013904226,
+      "a": 0,
+      "b": 2,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4730,
+      "verified": null
+    },
+    {
+      "job": 11,
+      "seed": 1013904226,
+      "a": 2,
+      "b": 0,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4741,
+      "verified": null
+    },
+    {
+      "job": 12,
+      "seed": 3668339987,
+      "a": 0,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4788,
+      "verified": null
+    },
+    {
+      "job": 13,
+      "seed": 3668339987,
+      "a": 2,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4459,
+      "verified": null
+    },
+    {
+      "job": 14,
+      "seed": 2027808452,
+      "a": 0,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 15,
+      "seed": 2027808452,
+      "a": 2,
+      "b": 0,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4717,
+      "verified": null
+    },
+    {
+      "job": 16,
+      "seed": 2654435761,
+      "a": 0,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4501,
+      "verified": null
+    },
+    {
+      "job": 17,
+      "seed": 2654435761,
+      "a": 3,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4651,
+      "verified": null
+    },
+    {
+      "job": 18,
+      "seed": 1013904226,
+      "a": 0,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4263,
+      "verified": null
+    },
+    {
+      "job": 19,
+      "seed": 1013904226,
+      "a": 3,
+      "b": 0,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2574,
+      "verified": null
+    },
+    {
+      "job": 20,
+      "seed": 3668339987,
+      "a": 0,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 1222,
+      "verified": true
+    },
+    {
+      "job": 21,
+      "seed": 3668339987,
+      "a": 3,
+      "b": 0,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 3470,
+      "verified": null
+    },
+    {
+      "job": 22,
+      "seed": 2027808452,
+      "a": 0,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 23,
+      "seed": 2027808452,
+      "a": 3,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4561,
+      "verified": null
+    },
+    {
+      "job": 24,
+      "seed": 2654435761,
+      "a": 0,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 3388,
+      "verified": null
+    },
+    {
+      "job": 25,
+      "seed": 2654435761,
+      "a": 4,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4790,
+      "verified": null
+    },
+    {
+      "job": 26,
+      "seed": 1013904226,
+      "a": 0,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 3273,
+      "verified": null
+    },
+    {
+      "job": 27,
+      "seed": 1013904226,
+      "a": 4,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4800,
+      "verified": null
+    },
+    {
+      "job": 28,
+      "seed": 3668339987,
+      "a": 0,
+      "b": 4,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 3892,
+      "verified": null
+    },
+    {
+      "job": 29,
+      "seed": 3668339987,
+      "a": 4,
+      "b": 0,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 1997,
+      "verified": null
+    },
+    {
+      "job": 30,
+      "seed": 2027808452,
+      "a": 0,
+      "b": 4,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4773,
+      "verified": null
+    },
+    {
+      "job": 31,
+      "seed": 2027808452,
+      "a": 4,
+      "b": 0,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4524,
+      "verified": null
+    },
+    {
+      "job": 32,
+      "seed": 2654435761,
+      "a": 1,
+      "b": 2,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4719,
+      "verified": null
+    },
+    {
+      "job": 33,
+      "seed": 2654435761,
+      "a": 2,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4741,
+      "verified": null
+    },
+    {
+      "job": 34,
+      "seed": 1013904226,
+      "a": 1,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4521,
+      "verified": null
+    },
+    {
+      "job": 35,
+      "seed": 1013904226,
+      "a": 2,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 36,
+      "seed": 3668339987,
+      "a": 1,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4701,
+      "verified": null
+    },
+    {
+      "job": 37,
+      "seed": 3668339987,
+      "a": 2,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4691,
+      "verified": null
+    },
+    {
+      "job": 38,
+      "seed": 2027808452,
+      "a": 1,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 39,
+      "seed": 2027808452,
+      "a": 2,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4676,
+      "verified": null
+    },
+    {
+      "job": 40,
+      "seed": 2654435761,
+      "a": 1,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2421,
+      "verified": true
+    },
+    {
+      "job": 41,
+      "seed": 2654435761,
+      "a": 3,
+      "b": 1,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 1993,
+      "verified": null
+    },
+    {
+      "job": 42,
+      "seed": 1013904226,
+      "a": 1,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4503,
+      "verified": null
+    },
+    {
+      "job": 43,
+      "seed": 1013904226,
+      "a": 3,
+      "b": 1,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4561,
+      "verified": null
+    },
+    {
+      "job": 44,
+      "seed": 3668339987,
+      "a": 1,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 662,
+      "verified": null
+    },
+    {
+      "job": 45,
+      "seed": 3668339987,
+      "a": 3,
+      "b": 1,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 2159,
+      "verified": null
+    },
+    {
+      "job": 46,
+      "seed": 2027808452,
+      "a": 1,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4590,
+      "verified": null
+    },
+    {
+      "job": 47,
+      "seed": 2027808452,
+      "a": 3,
+      "b": 1,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4727,
+      "verified": null
+    },
+    {
+      "job": 48,
+      "seed": 2654435761,
+      "a": 1,
+      "b": 4,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 1649,
+      "verified": null
+    },
+    {
+      "job": 49,
+      "seed": 2654435761,
+      "a": 4,
+      "b": 1,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4759,
+      "verified": null
+    },
+    {
+      "job": 50,
+      "seed": 1013904226,
+      "a": 1,
+      "b": 4,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2410,
+      "verified": null
+    },
+    {
+      "job": 51,
+      "seed": 1013904226,
+      "a": 4,
+      "b": 1,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 1807,
+      "verified": null
+    },
+    {
+      "job": 52,
+      "seed": 3668339987,
+      "a": 1,
+      "b": 4,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4461,
+      "verified": null
+    },
+    {
+      "job": 53,
+      "seed": 3668339987,
+      "a": 4,
+      "b": 1,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 1703,
+      "verified": null
+    },
+    {
+      "job": 54,
+      "seed": 2027808452,
+      "a": 1,
+      "b": 4,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4723,
+      "verified": null
+    },
+    {
+      "job": 55,
+      "seed": 2027808452,
+      "a": 4,
+      "b": 1,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2957,
+      "verified": null
+    },
+    {
+      "job": 56,
+      "seed": 2654435761,
+      "a": 2,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4387,
+      "verified": null
+    },
+    {
+      "job": 57,
+      "seed": 2654435761,
+      "a": 3,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4800,
+      "verified": null
+    },
+    {
+      "job": 58,
+      "seed": 1013904226,
+      "a": 2,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4321,
+      "verified": null
+    },
+    {
+      "job": 59,
+      "seed": 1013904226,
+      "a": 3,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4481,
+      "verified": null
+    },
+    {
+      "job": 60,
+      "seed": 3668339987,
+      "a": 2,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2937,
+      "verified": true
+    },
+    {
+      "job": 61,
+      "seed": 3668339987,
+      "a": 3,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 62,
+      "seed": 2027808452,
+      "a": 2,
+      "b": 3,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4641,
+      "verified": null
+    },
+    {
+      "job": 63,
+      "seed": 2027808452,
+      "a": 3,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4601,
+      "verified": null
+    },
+    {
+      "job": 64,
+      "seed": 2654435761,
+      "a": 2,
+      "b": 4,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4800,
+      "verified": null
+    },
+    {
+      "job": 65,
+      "seed": 2654435761,
+      "a": 4,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4739,
+      "verified": null
+    },
+    {
+      "job": 66,
+      "seed": 1013904226,
+      "a": 2,
+      "b": 4,
+      "winner": 0,
+      "reason": "hill_locked",
+      "ticks": 4410,
+      "verified": null
+    },
+    {
+      "job": 67,
+      "seed": 1013904226,
+      "a": 4,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4799,
+      "verified": null
+    },
+    {
+      "job": 68,
+      "seed": 3668339987,
+      "a": 2,
+      "b": 4,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 1728,
+      "verified": null
+    },
+    {
+      "job": 69,
+      "seed": 3668339987,
+      "a": 4,
+      "b": 2,
+      "winner": 1,
+      "reason": "hill_locked",
+      "ticks": 4800,
+      "verified": null
+    },
+    {
+      "job": 70,
+      "seed": 2027808452,
+      "a": 2,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 2072,
+      "verified": null
+    },
+    {
+      "job": 71,
+      "seed": 2027808452,
+      "a": 4,
+      "b": 2,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2489,
+      "verified": null
+    },
+    {
+      "job": 72,
+      "seed": 2654435761,
+      "a": 3,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 2119,
+      "verified": null
+    },
+    {
+      "job": 73,
+      "seed": 2654435761,
+      "a": 4,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 3509,
+      "verified": null
+    },
+    {
+      "job": 74,
+      "seed": 1013904226,
+      "a": 3,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 3356,
+      "verified": null
+    },
+    {
+      "job": 75,
+      "seed": 1013904226,
+      "a": 4,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 2662,
+      "verified": null
+    },
+    {
+      "job": 76,
+      "seed": 3668339987,
+      "a": 3,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 1212,
+      "verified": null
+    },
+    {
+      "job": 77,
+      "seed": 3668339987,
+      "a": 4,
+      "b": 3,
+      "winner": 0,
+      "reason": "eliminated",
+      "ticks": 748,
+      "verified": null
+    },
+    {
+      "job": 78,
+      "seed": 2027808452,
+      "a": 3,
+      "b": 4,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 2034,
+      "verified": null
+    },
+    {
+      "job": 79,
+      "seed": 2027808452,
+      "a": 4,
+      "b": 3,
+      "winner": 1,
+      "reason": "eliminated",
+      "ticks": 3208,
+      "verified": null
+    }
+  ]
+}
