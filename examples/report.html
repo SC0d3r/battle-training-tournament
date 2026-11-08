@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>battle.training tournament — s2.0.0</title>
+<style>
+  :root {
+    --bg: #0b0f14; --panel: #111821; --panel-2: #0e141c; --line: #22303f;
+    --text: #e6edf3; --muted: #8b98a5; --accent: #e4572e; --blue: #5b8def;
+    --green: #2ea043; --red: #da3633; --track: #1a2431;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 64px; }
+  .eyebrow { color: var(--accent); font-weight: 650; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+  h1 { font-size: 34px; line-height: 1.15; margin: 8px 0 14px; letter-spacing: -.02em; }
+  h2 { font-size: 19px; margin: 42px 0 6px; letter-spacing: -.01em; }
+  h2 + .sub { margin: 0 0 14px; }
+  .sub, .muted { color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+  .chip { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; color: var(--muted); font-size: 12.5px; }
+  .chip b { color: var(--text); font-weight: 600; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; }
+  .stat { background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .stat .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .stat .value { font-size: 26px; font-weight: 700; margin-top: 4px; }
+  .stat .hint { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 11px 14px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+  thead th { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; background: var(--panel-2); }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  tbody tr:hover { background: #141d28; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rank { color: var(--muted); width: 42px; }
+  .participant .kind { color: var(--muted); font-size: 11px; margin-left: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 1px 7px; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; background: var(--accent); }
+  .dot.house { background: var(--blue); }
+  .bad { color: var(--red); font-weight: 650; }
+  .chart { width: 100%; height: auto; display: block; }
+  .chart .track { fill: var(--track); }
+  .chart .baseline { stroke: #3b4a5c; stroke-width: 1; stroke-dasharray: 3 4; }
+  .chart .whisker { stroke: #c9d4df; stroke-width: 1.6; }
+  .chart .name { fill: var(--text); font-size: 12.5px; }
+  .chart .value { fill: var(--text); font-size: 12.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .chart .axis { fill: var(--muted); font-size: 10.5px; }
+  .matrix th, .matrix td { text-align: center; padding: 9px 10px; }
+  .matrix tbody th { text-align: left; font-weight: 600; }
+  .matrix .diagonal { background: #0c1219; color: #3b4a5c; }
+  .matrix .empty { color: #3b4a5c; }
+  .matrix .score { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .matrix .tiny { font-size: 10px; opacity: .7; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 10px 0 0; color: var(--muted); font-size: 12.5px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  details { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-top: 12px; }
+  details summary { cursor: pointer; font-weight: 650; }
+  details ul { margin: 12px 0 0; padding-left: 20px; color: var(--muted); }
+  details li { margin: 6px 0; }
+  code { background: #0a1017; border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; font-size: 12.5px; color: #d6e2ee; }
+  footer { margin-top: 46px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } h1 { font-size: 27px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">battle.training · local tournament</div>
+    <h1>5 participants, 80 matches, one ranking</h1>
+    <p class="sub">Round-robin with mirrored sides on the arena's own engine. Scores and Elo carry 95% intervals, because small samples lie.</p>
+    <div class="chips">
+      <span class="chip">rules <b>s2.0.0</b></span>
+      <span class="chip">engine <b>0.1.0</b></span>
+      <span class="chip">seeds <b>4</b></span>
+      <span class="chip">generated <b>2026-11-08 08:43:08 UTC</b></span>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><div class="label">Matches played</div><div class="value">80</div><div class="hint">0 failed</div></div>
+    <div class="stat"><div class="label">Participants</div><div class="value">5</div><div class="hint">1 controllers · 4 house bots</div></div>
+    <div class="stat"><div class="label">Draws</div><div class="value">0</div><div class="hint">counted as half a win</div></div>
+    <div class="stat"><div class="label">Replays verified</div><div class="value">4</div><div class="hint">hash-checked by the arena</div></div>
+  </section>
+
+  <h2>Leaderboard</h2>
+  <p class="sub">Elo from a Bradley–Terry fit; score is wins plus half of the draws over games. Intervals are 95%.</p>
+  <div class="panel scroll">
+    <table>
+      <thead><tr>
+        <th scope="col">#</th><th scope="col">Participant</th><th scope="col" class="num">Elo [95% CI]</th>
+        <th scope="col" class="num">Score [95% CI]</th><th scope="col" class="num">W-D-L</th><th scope="col" class="num">Games</th>
+        <th scope="col" class="num">Dmg dealt/g</th><th scope="col" class="num">Dmg taken/g</th><th scope="col" class="num">Tick errors</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="rank">1</td>
+      <td class="participant"><span class="dot house"></span><b>house-holder</b><span class="kind">house</span></td>
+      <td class="num"><b>1740</b> <span class="muted">[1654, 1875]</span></td>
+      <td class="num">84.4% <span class="muted">[68.2%, 93.1%]</span></td>
+      <td class="num">27-0-5</td>
+      <td class="num">32</td>
+      <td class="num">156</td>
+      <td class="num">203</td>
+      <td class="num ">0</td>
+    </tr>
+    <tr>
+      <td class="rank">2</td>
+      <td class="participant"><span class="dot controller"></span><b>controller-starter</b><span class="kind">controller</span></td>
+      <td class="num"><b>1595</b> <span class="muted">[1488, 1737]</span></td>
+      <td class="num">62.5% <span class="muted">[45.3%, 77.1%]</span></td>
+      <td class="num">20-0-12</td>
+      <td class="num">32</td>
+      <td class="num">166</td>
+      <td class="num">192</td>
+      <td class="num ">0</td>
+    </tr>
+    <tr>
+      <td class="rank">3</td>
+      <td class="participant"><span class="dot house"></span><b>house-brawler</b><span class="kind">house</span></td>
+      <td class="num"><b>1513</b> <span class="muted">[1395, 1652]</span></td>
+      <td class="num">50.0% <span class="muted">[33.6%, 66.4%]</span></td>
+      <td class="num">16-0-16</td>
+      <td class="num">32</td>
+      <td class="num">252</td>
+      <td class="num">158</td>
+      <td class="num ">0</td>
+    </tr>
+    <tr>
+      <td class="rank">4</td>
+      <td class="participant"><span class="dot house"></span><b>house-hunter</b><span class="kind">house</span></td>
+      <td class="num"><b>1471</b> <span class="muted">[1339, 1581]</span></td>
+      <td class="num">43.8% <span class="muted">[28.2%, 60.7%]</span></td>
+      <td class="num">14-0-18</td>
+      <td class="num">32</td>
+      <td class="num">343</td>
+      <td class="num">213</td>
+      <td class="num ">0</td>
+    </tr>
+    <tr>
+      <td class="rank">5</td>
+      <td class="participant"><span class="dot house"></span><b>house-random</b><span class="kind">house</span></td>
+      <td class="num"><b>1181</b> <span class="muted">[809, 1289]</span></td>
+      <td class="num">9.4% <span class="muted">[3.2%, 24.2%]</span></td>
+      <td class="num">3-0-29</td>
+      <td class="num">32</td>
+      <td class="num">151</td>
+      <td class="num">301</td>
+      <td class="num ">0</td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Elo with uncertainty</h2>
+  <p class="sub">Bar length is the rating; the whisker is the 95% bootstrap interval over games. House bots are blue.</p>
+  <div class="panel" style="padding:18px 16px"><svg viewBox="0 0 860 204" role="img" aria-label="Elo ratings with 95% intervals" class="chart">
+<line x1="576.2705060907235" y1="10" x2="576.2705060907235" y2="194" class="baseline"/>
+<text x="576.2705060907235" y="203" text-anchor="middle" class="axis">1500</text>
+<text x="178" y="27" text-anchor="end" class="name">house-holder</text>
+<rect x="190" y="15" width="600" height="14" rx="3" class="track"/>
+<rect x="660.5365165110234" y="17" width="46.91701441914029" height="10" rx="3" fill="#5b8def"/>
+<line x1="660.5365165110234" y1="22" x2="781.7884886200634" y2="22" class="whisker"/>
+<line x1="660.5365165110234" y1="17" x2="660.5365165110234" y2="27" class="whisker"/>
+<line x1="781.7884886200634" y1="17" x2="781.7884886200634" y2="27" class="whisker"/>
+<text x="800" y="27" class="value">1740</text>
+<text x="178" y="61" text-anchor="end" class="name">controller-starter</text>
+<rect x="190" y="49" width="600" height="14" rx="3" class="track"/>
+<rect x="569.683636164619" y="51" width="58.643522273428175" height="10" rx="3" fill="#e4572e"/>
+<line x1="569.683636164619" y1="56" x2="706.1772321925964" y2="56" class="whisker"/>
+<line x1="569.683636164619" y1="51" x2="569.683636164619" y2="61" class="whisker"/>
+<line x1="706.1772321925964" y1="51" x2="706.1772321925964" y2="61" class="whisker"/>
+<text x="800" y="61" class="value">1595</text>
+<text x="178" y="95" text-anchor="end" class="name">house-brawler</text>
+<rect x="190" y="83" width="600" height="14" rx="3" class="track"/>
+<rect x="518.5933811812035" y="85" width="64.95790418835782" height="10" rx="3" fill="#5b8def"/>
+<line x1="518.5933811812035" y1="90" x2="659.6785131316801" y2="90" class="whisker"/>
+<line x1="518.5933811812035" y1="85" x2="518.5933811812035" y2="95" class="whisker"/>
+<line x1="659.6785131316801" y1="85" x2="659.6785131316801" y2="95" class="whisker"/>
+<text x="800" y="95" class="value">1513</text>
+<text x="178" y="129" text-anchor="end" class="name">house-hunter</text>
+<rect x="190" y="117" width="600" height="14" rx="3" class="track"/>
+<rect x="488.3913693127787" y="119" width="72.11880398503138" height="10" rx="3" fill="#5b8def"/>
+<line x1="488.3913693127787" y1="124" x2="620.8810248542186" y2="124" class="whisker"/>
+<line x1="488.3913693127787" y1="119" x2="488.3913693127787" y2="129" class="whisker"/>
+<line x1="620.8810248542186" y1="119" x2="620.8810248542186" y2="129" class="whisker"/>
+<text x="800" y="129" class="value">1471</text>
+<text x="178" y="163" text-anchor="end" class="name">house-random</text>
+<rect x="190" y="151" width="600" height="14" rx="3" class="track"/>
+<rect x="198.21151137993655" y="153" width="203.29887103809898" height="10" rx="3" fill="#5b8def"/>
+<line x1="198.21151137993655" y1="158" x2="460.92025850668125" y2="158" class="whisker"/>
+<line x1="198.21151137993655" y1="153" x2="198.21151137993655" y2="163" class="whisker"/>
+<line x1="460.92025850668125" y1="153" x2="460.92025850668125" y2="163" class="whisker"/>
+<text x="800" y="163" class="value">1181</text>
+</svg></div>
+
+  <h2>Head to head</h2>
+  <p class="sub">Each cell is the row participant's score against the column participant. Hover for the W-D-L record.</p>
+  <div class="panel"><div class="scroll"><table class="matrix"><thead><tr><th scope="col">row score vs column</th><th scope="col" title="controller-starter">controller-star…</th><th scope="col" title="house-brawler">house-brawler</th><th scope="col" title="house-holder">house-holder</th><th scope="col" title="house-random">house-random</th><th scope="col" title="house-hunter">house-hunter</th></tr></thead><tbody><tr><th scope="row">controller-starter</th><td class="diagonal">—</td><td class="score" style="background:hsl(90 55% 24%)" title="controller-starter vs house-brawler: 6-0-2">75<span class="tiny">%</span></td><td class="score" style="background:hsl(30 55% 24%)" title="controller-starter vs house-holder: 2-0-6">25<span class="tiny">%</span></td><td class="score" style="background:hsl(105 55% 24%)" title="controller-starter vs house-random: 7-0-1">88<span class="tiny">%</span></td><td class="score" style="background:hsl(75 55% 24%)" title="controller-starter vs house-hunter: 5-0-3">63<span class="tiny">%</span></td></tr><tr><th scope="row">house-brawler</th><td class="score" style="background:hsl(30 55% 24%)" title="house-brawler vs controller-starter: 2-0-6">25<span class="tiny">%</span></td><td class="diagonal">—</td><td class="score" style="background:hsl(15 55% 24%)" title="house-brawler vs house-holder: 1-0-7">13<span class="tiny">%</span></td><td class="score" style="background:hsl(105 55% 24%)" title="house-brawler vs house-random: 7-0-1">88<span class="tiny">%</span></td><td class="score" style="background:hsl(90 55% 24%)" title="house-brawler vs house-hunter: 6-0-2">75<span class="tiny">%</span></td></tr><tr><th scope="row">house-holder</th><td class="score" style="background:hsl(90 55% 24%)" title="house-holder vs controller-starter: 6-0-2">75<span class="tiny">%</span></td><td class="score" style="background:hsl(105 55% 24%)" title="house-holder vs house-brawler: 7-0-1">88<span class="tiny">%</span></td><td class="diagonal">—</td><td class="score" style="background:hsl(120 55% 24%)" title="house-holder vs house-random: 8-0-0">100<span class="tiny">%</span></td><td class="score" style="background:hsl(90 55% 24%)" title="house-holder vs house-hunter: 6-0-2">75<span class="tiny">%</span></td></tr><tr><th scope="row">house-random</th><td class="score" style="background:hsl(15 55% 24%)" title="house-random vs controller-starter: 1-0-7">13<span class="tiny">%</span></td><td class="score" style="background:hsl(15 55% 24%)" title="house-random vs house-brawler: 1-0-7">13<span class="tiny">%</span></td><td class="score" style="background:hsl(0 55% 24%)" title="house-random vs house-holder: 0-0-8">0<span class="tiny">%</span></td><td class="diagonal">—</td><td class="score" style="background:hsl(15 55% 24%)" title="house-random vs house-hunter: 1-0-7">13<span class="tiny">%</span></td></tr><tr><th scope="row">house-hunter</th><td class="score" style="background:hsl(45 55% 24%)" title="house-hunter vs controller-starter: 3-0-5">38<span class="tiny">%</span></td><td class="score" style="background:hsl(30 55% 24%)" title="house-hunter vs house-brawler: 2-0-6">25<span class="tiny">%</span></td><td class="score" style="background:hsl(30 55% 24%)" title="house-hunter vs house-holder: 2-0-6">25<span class="tiny">%</span></td><td class="score" style="background:hsl(105 55% 24%)" title="house-hunter vs house-random: 7-0-1">88<span class="tiny">%</span></td><td class="diagonal">—</td></tr></tbody></table></div></div>
+
+  <h2>Matchups</h2>
+  <p class="sub">The same numbers with counts and intervals, for copying into a tuning note.</p>
+  <div class="panel scroll">
+    <table>
+      <thead><tr><th scope="col">Pairing</th><th scope="col" class="num">Games</th><th scope="col" class="num">A wins</th><th scope="col" class="num">Draws</th><th scope="col" class="num">B wins</th><th scope="col" class="num">A score [95% CI]</th></tr></thead>
+      <tbody>
+    <tr>
+      <td><b>controller-starter</b> vs <b>house-brawler</b></td>
+      <td class="num">8</td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="num">75.0% <span class="muted">[40.9%, 92.9%]</span></td>
+    </tr>
+    <tr>
+      <td><b>controller-starter</b> vs <b>house-holder</b></td>
+      <td class="num">8</td>
+      <td class="num">2</td>
+      <td class="num">0</td>
+      <td class="num">6</td>
+      <td class="num">25.0% <span class="muted">[7.1%, 59.1%]</span></td>
+    </tr>
+    <tr>
+      <td><b>controller-starter</b> vs <b>house-hunter</b></td>
+      <td class="num">8</td>
+      <td class="num">5</td>
+      <td class="num">0</td>
+      <td class="num">3</td>
+      <td class="num">62.5% <span class="muted">[30.6%, 86.3%]</span></td>
+    </tr>
+    <tr>
+      <td><b>controller-starter</b> vs <b>house-random</b></td>
+      <td class="num">8</td>
+      <td class="num">7</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="num">87.5% <span class="muted">[52.9%, 97.8%]</span></td>
+    </tr>
+    <tr>
+      <td><b>house-brawler</b> vs <b>house-holder</b></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">0</td>
+      <td class="num">7</td>
+      <td class="num">12.5% <span class="muted">[2.2%, 47.1%]</span></td>
+    </tr>
+    <tr>
+      <td><b>house-brawler</b> vs <b>house-hunter</b></td>
+      <td class="num">8</td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="num">75.0% <span class="muted">[40.9%, 92.9%]</span></td>
+    </tr>
+    <tr>
+      <td><b>house-brawler</b> vs <b>house-random</b></td>
+      <td class="num">8</td>
+      <td class="num">7</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="num">87.5% <span class="muted">[52.9%, 97.8%]</span></td>
+    </tr>
+    <tr>
+      <td><b>house-holder</b> vs <b>house-hunter</b></td>
+      <td class="num">8</td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="num">75.0% <span class="muted">[40.9%, 92.9%]</span></td>
+    </tr>
+    <tr>
+      <td><b>house-holder</b> vs <b>house-random</b></td>
+      <td class="num">8</td>
+      <td class="num">8</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="num">100.0% <span class="muted">[67.6%, 100.0%]</span></td>
+    </tr>
+    <tr>
+      <td><b>house-random</b> vs <b>house-hunter</b></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">0</td>
+      <td class="num">7</td>
+      <td class="num">12.5% <span class="muted">[2.2%, 47.1%]</span></td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>Method and reproducibility</summary>
+    <ul>
+      <li>Every unordered pair plays every seed from both sides, so map and side bias cancel instead of deciding the ranking.</li>
+      <li>Seeds are deterministic: <code>seed = (s * 2654435761) mod 2^32</code>, the same rule the official local-test uses. Seeds: <code>2654435761, 1013904226, 3668339987, 2027808452</code>.</li>
+      <li>Score = <code>(wins + 0.5 * draws) / games</code>; the interval is a 95% Wilson score interval.</li>
+      <li>Elo = <code>1500 + 400 * log10(strength)</code> from a Bradley–Terry fit (MM algorithm). A 0.25 pseudo-win / 0.5 pseudo-game prior keeps undefeated and winless ratings finite. The interval is a 300-resample bootstrap over games.</li>
+      <li>Each controller is evaluated in a fresh VM context per match, so module-level state cannot leak between games.</li>
+      <li>4/4 sampled replays re-simulated and matched their recorded hashes.</li>
+      <li>Reproduce: <code>node bt-tournament.mjs --controllers examples/controller-starter.js --vs brawler,holder,random,hunter --seeds 4 --workers 4 --verify 4 --out examples</code></li>
+    </ul>
+  </details>
+
+  <footer>
+    Generated by bt-tournament 1.0.0 against battle.training engine 0.1.0 · rules hash 32ce8c36247ff67d.
+    Not affiliated with battle.training. Results are local simulations; the public ladder is the final judge.
+  </footer>
+</div>
+</body>
+</html>
