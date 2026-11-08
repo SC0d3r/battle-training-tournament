@@ -819,6 +819,7 @@ const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (ch) => ({
 
 const pct = (value) => `${(100 * value).toFixed(1)}%`;
 const num = (value, digits = 1) => (value == null ? "—" : value.toFixed(digits));
+const countLabel = (count, noun) => `${count} ${noun}${count === 1 ? "" : "s"}`;
 
 function eloCell(row) {
   if (row.elo == null) return '<span class="muted">—</span>';
@@ -842,12 +843,16 @@ function eloChart(ranked) {
   const height = rows.length * rowHeight + 34;
   const x = (value) => left + ((value - min) / Math.max(1, max - min)) * (width - left - right);
   const mid = 1500 >= min && 1500 <= max ? 1500 : null;
+  const dataLow = Math.min(...lows);
+  const dataHigh = Math.max(...highs);
   const parts = [];
-  parts.push(`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Elo ratings with 95% intervals" class="chart">`);
+  parts.push(`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Elo ratings with 95% bootstrap intervals" class="chart">`);
   if (mid != null) {
     parts.push(`<line x1="${x(mid)}" y1="10" x2="${x(mid)}" y2="${height - 10}" class="baseline"/>`);
     parts.push(`<text x="${x(mid)}" y="${height - 1}" text-anchor="middle" class="axis">1500</text>`);
   }
+  parts.push(`<text x="${x(dataLow)}" y="${height - 1}" text-anchor="middle" class="axis">${Math.round(dataLow)}</text>`);
+  parts.push(`<text x="${x(dataHigh)}" y="${height - 1}" text-anchor="middle" class="axis">${Math.round(dataHigh)}</text>`);
   rows.forEach((row, index) => {
     const y = 22 + index * rowHeight;
     const value = x(row.elo);
@@ -856,10 +861,9 @@ function eloChart(ranked) {
     const colour = row.kind === "house" ? "#5b8def" : "#e4572e";
     parts.push(`<text x="${left - 12}" y="${y + 5}" text-anchor="end" class="name">${escapeHtml(row.name)}</text>`);
     parts.push(`<rect x="${left}" y="${y - 7}" width="${width - left - right}" height="14" rx="3" class="track"/>`);
-    parts.push(`<rect x="${Math.min(low, value)}" y="${y - 5}" width="${Math.max(2, Math.abs(value - low))}" height="10" rx="3" fill="${colour}"/>`);
-    parts.push(`<line x1="${low}" y1="${y}" x2="${high}" y2="${y}" class="whisker"/>`);
-    parts.push(`<line x1="${low}" y1="${y - 5}" x2="${low}" y2="${y + 5}" class="whisker"/>`);
-    parts.push(`<line x1="${high}" y1="${y - 5}" x2="${high}" y2="${y + 5}" class="whisker"/>`);
+    // The bar is the interval, the dot is the point estimate: bar length must not imply rating.
+    parts.push(`<rect x="${low}" y="${y - 4}" width="${Math.max(2, high - low)}" height="8" rx="4" fill="${colour}" opacity="0.35"/>`);
+    parts.push(`<circle cx="${value}" cy="${y}" r="5" fill="${colour}"/>`);
     parts.push(`<text x="${width - right + 10}" y="${y + 5}" class="value">${Math.round(row.elo)}</text>`);
   });
   parts.push("</svg>");
@@ -901,6 +905,8 @@ export function renderHtml(report) {
     return y.elo - x.elo;
   });
 
+  // "Games" is omitted from the leaderboard: it is exactly wins + draws + losses, which the
+  // W-D-L column already shows, and the extra column pushed the table past the panel width.
   const leaderboard = ranked.map((row, index) => `
     <tr>
       <td class="rank">${row.games ? index + 1 : "—"}</td>
@@ -908,7 +914,6 @@ export function renderHtml(report) {
       <td class="num">${eloCell(row)}</td>
       <td class="num">${row.games ? pct(row.score) : "—"}${row.games ? ` <span class="muted">[${pct(row.scoreCI[0])}, ${pct(row.scoreCI[1])}]</span>` : ""}</td>
       <td class="num">${row.wins}-${row.draws}-${row.losses}</td>
-      <td class="num">${row.games}</td>
       <td class="num">${row.games ? num(row.damageDealt / row.games, 0) : "—"}</td>
       <td class="num">${row.games ? num(row.damageTaken / row.games, 0) : "—"}</td>
       <td class="num ${row.tickErrors ? "bad" : ""}">${row.tickErrors}</td>
@@ -959,7 +964,7 @@ export function renderHtml(report) {
   .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
   .scroll { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 11px 14px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
   thead th { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; background: var(--panel-2); }
   tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
   tbody tr:hover { background: #141d28; }
@@ -1009,7 +1014,7 @@ export function renderHtml(report) {
 
   <section class="stats">
     <div class="stat"><div class="label">Matches played</div><div class="value">${totals.played}</div><div class="hint">${totals.failed} failed</div></div>
-    <div class="stat"><div class="label">Participants</div><div class="value">${standings.length}</div><div class="hint">${standings.filter((r) => r.kind === "controller").length} controllers · ${standings.filter((r) => r.kind === "house").length} house bots</div></div>
+    <div class="stat"><div class="label">Participants</div><div class="value">${standings.length}</div><div class="hint">${countLabel(standings.filter((r) => r.kind === "controller").length, "controller")} · ${countLabel(standings.filter((r) => r.kind === "house").length, "house bot")}</div></div>
     <div class="stat"><div class="label">Draws</div><div class="value">${totals.draws}</div><div class="hint">counted as half a win</div></div>
     <div class="stat"><div class="label">Replays verified</div><div class="value">${totals.verified}${totals.verifyFailed ? `<span class="bad"> +${totals.verifyFailed} failed</span>` : ""}</div><div class="hint">hash-checked by the arena</div></div>
   </section>
@@ -1020,7 +1025,7 @@ export function renderHtml(report) {
     <table>
       <thead><tr>
         <th scope="col">#</th><th scope="col">Participant</th><th scope="col" class="num">Elo [95% CI]</th>
-        <th scope="col" class="num">Score [95% CI]</th><th scope="col" class="num">W-D-L</th><th scope="col" class="num">Games</th>
+        <th scope="col" class="num">Score [95% CI]</th><th scope="col" class="num">W-D-L</th>
         <th scope="col" class="num">Dmg dealt/g</th><th scope="col" class="num">Dmg taken/g</th><th scope="col" class="num">Tick errors</th>
       </tr></thead>
       <tbody>${leaderboard}
@@ -1029,7 +1034,7 @@ export function renderHtml(report) {
   </div>
 
   <h2>Elo with uncertainty</h2>
-  <p class="sub">Bar length is the rating; the whisker is the 95% bootstrap interval over games. House bots are blue.</p>
+  <p class="sub">The dot is the rating; the bar is its 95% bootstrap interval over games. House bots are blue.</p>
   <div class="panel" style="padding:18px 16px">${eloChart(ranked)}</div>
 
   <h2>Head to head</h2>

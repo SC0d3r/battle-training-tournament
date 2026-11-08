@@ -29,7 +29,7 @@
   .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
   .scroll { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 11px 14px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
   thead th { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; background: var(--panel-2); }
   tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
   tbody tr:hover { background: #141d28; }
@@ -73,13 +73,13 @@
       <span class="chip">rules <b>s2.0.0</b></span>
       <span class="chip">engine <b>0.1.0</b></span>
       <span class="chip">seeds <b>4</b></span>
-      <span class="chip">generated <b>2026-11-08 08:43:08 UTC</b></span>
+      <span class="chip">generated <b>2026-11-08 09:19:29 UTC</b></span>
     </div>
   </header>
 
   <section class="stats">
     <div class="stat"><div class="label">Matches played</div><div class="value">80</div><div class="hint">0 failed</div></div>
-    <div class="stat"><div class="label">Participants</div><div class="value">5</div><div class="hint">1 controllers · 4 house bots</div></div>
+    <div class="stat"><div class="label">Participants</div><div class="value">5</div><div class="hint">1 controller · 4 house bots</div></div>
     <div class="stat"><div class="label">Draws</div><div class="value">0</div><div class="hint">counted as half a win</div></div>
     <div class="stat"><div class="label">Replays verified</div><div class="value">4</div><div class="hint">hash-checked by the arena</div></div>
   </section>
@@ -90,17 +90,16 @@
     <table>
       <thead><tr>
         <th scope="col">#</th><th scope="col">Participant</th><th scope="col" class="num">Elo [95% CI]</th>
-        <th scope="col" class="num">Score [95% CI]</th><th scope="col" class="num">W-D-L</th><th scope="col" class="num">Games</th>
+        <th scope="col" class="num">Score [95% CI]</th><th scope="col" class="num">W-D-L</th>
         <th scope="col" class="num">Dmg dealt/g</th><th scope="col" class="num">Dmg taken/g</th><th scope="col" class="num">Tick errors</th>
       </tr></thead>
       <tbody>
     <tr>
       <td class="rank">1</td>
       <td class="participant"><span class="dot house"></span><b>house-holder</b><span class="kind">house</span></td>
-      <td class="num"><b>1740</b> <span class="muted">[1654, 1875]</span></td>
+      <td class="num"><b>1740</b> <span class="muted">[1640, 1848]</span></td>
       <td class="num">84.4% <span class="muted">[68.2%, 93.1%]</span></td>
       <td class="num">27-0-5</td>
-      <td class="num">32</td>
       <td class="num">156</td>
       <td class="num">203</td>
       <td class="num ">0</td>
@@ -108,10 +107,9 @@
     <tr>
       <td class="rank">2</td>
       <td class="participant"><span class="dot controller"></span><b>controller-starter</b><span class="kind">controller</span></td>
-      <td class="num"><b>1595</b> <span class="muted">[1488, 1737]</span></td>
+      <td class="num"><b>1595</b> <span class="muted">[1472, 1722]</span></td>
       <td class="num">62.5% <span class="muted">[45.3%, 77.1%]</span></td>
       <td class="num">20-0-12</td>
-      <td class="num">32</td>
       <td class="num">166</td>
       <td class="num">192</td>
       <td class="num ">0</td>
@@ -119,10 +117,9 @@
     <tr>
       <td class="rank">3</td>
       <td class="participant"><span class="dot house"></span><b>house-brawler</b><span class="kind">house</span></td>
-      <td class="num"><b>1513</b> <span class="muted">[1395, 1652]</span></td>
+      <td class="num"><b>1513</b> <span class="muted">[1418, 1628]</span></td>
       <td class="num">50.0% <span class="muted">[33.6%, 66.4%]</span></td>
       <td class="num">16-0-16</td>
-      <td class="num">32</td>
       <td class="num">252</td>
       <td class="num">158</td>
       <td class="num ">0</td>
@@ -130,10 +127,9 @@
     <tr>
       <td class="rank">4</td>
       <td class="participant"><span class="dot house"></span><b>house-hunter</b><span class="kind">house</span></td>
-      <td class="num"><b>1471</b> <span class="muted">[1339, 1581]</span></td>
+      <td class="num"><b>1471</b> <span class="muted">[1360, 1595]</span></td>
       <td class="num">43.8% <span class="muted">[28.2%, 60.7%]</span></td>
       <td class="num">14-0-18</td>
-      <td class="num">32</td>
       <td class="num">343</td>
       <td class="num">213</td>
       <td class="num ">0</td>
@@ -141,10 +137,9 @@
     <tr>
       <td class="rank">5</td>
       <td class="participant"><span class="dot house"></span><b>house-random</b><span class="kind">house</span></td>
-      <td class="num"><b>1181</b> <span class="muted">[809, 1289]</span></td>
+      <td class="num"><b>1181</b> <span class="muted">[820, 1310]</span></td>
       <td class="num">9.4% <span class="muted">[3.2%, 24.2%]</span></td>
       <td class="num">3-0-29</td>
-      <td class="num">32</td>
       <td class="num">151</td>
       <td class="num">301</td>
       <td class="num ">0</td>
@@ -154,44 +149,36 @@
   </div>
 
   <h2>Elo with uncertainty</h2>
-  <p class="sub">Bar length is the rating; the whisker is the 95% bootstrap interval over games. House bots are blue.</p>
-  <div class="panel" style="padding:18px 16px"><svg viewBox="0 0 860 204" role="img" aria-label="Elo ratings with 95% intervals" class="chart">
-<line x1="576.2705060907235" y1="10" x2="576.2705060907235" y2="194" class="baseline"/>
-<text x="576.2705060907235" y="203" text-anchor="middle" class="axis">1500</text>
+  <p class="sub">The dot is the rating; the bar is its 95% bootstrap interval over games. House bots are blue.</p>
+  <div class="panel" style="padding:18px 16px"><svg viewBox="0 0 860 204" role="img" aria-label="Elo ratings with 95% bootstrap intervals" class="chart">
+<line x1="584.3331127664817" y1="10" x2="584.3331127664817" y2="194" class="baseline"/>
+<text x="584.3331127664817" y="203" text-anchor="middle" class="axis">1500</text>
+<text x="198.50696964301068" y="203" text-anchor="middle" class="axis">820</text>
+<text x="781.4930303569894" y="203" text-anchor="middle" class="axis">1848</text>
 <text x="178" y="27" text-anchor="end" class="name">house-holder</text>
 <rect x="190" y="15" width="600" height="14" rx="3" class="track"/>
-<rect x="660.5365165110234" y="17" width="46.91701441914029" height="10" rx="3" fill="#5b8def"/>
-<line x1="660.5365165110234" y1="22" x2="781.7884886200634" y2="22" class="whisker"/>
-<line x1="660.5365165110234" y1="17" x2="660.5365165110234" y2="27" class="whisker"/>
-<line x1="781.7884886200634" y1="17" x2="781.7884886200634" y2="27" class="whisker"/>
+<rect x="663.7879837688643" y="18" width="117.70504658812513" height="8" rx="4" fill="#5b8def" opacity="0.35"/>
+<circle cx="720.2362319796048" cy="22" r="5" fill="#5b8def"/>
 <text x="800" y="27" class="value">1740</text>
 <text x="178" y="61" text-anchor="end" class="name">controller-starter</text>
 <rect x="190" y="49" width="600" height="14" rx="3" class="track"/>
-<rect x="569.683636164619" y="51" width="58.643522273428175" height="10" rx="3" fill="#e4572e"/>
-<line x1="569.683636164619" y1="56" x2="706.1772321925964" y2="56" class="whisker"/>
-<line x1="569.683636164619" y1="51" x2="569.683636164619" y2="61" class="whisker"/>
-<line x1="706.1772321925964" y1="51" x2="706.1772321925964" y2="61" class="whisker"/>
+<rect x="568.6306832910018" y="52" width="141.5210006342212" height="8" rx="4" fill="#e4572e" opacity="0.35"/>
+<circle cx="638.2628147111759" cy="56" r="5" fill="#e4572e"/>
 <text x="800" y="61" class="value">1595</text>
 <text x="178" y="95" text-anchor="end" class="name">house-brawler</text>
 <rect x="190" y="83" width="600" height="14" rx="3" class="track"/>
-<rect x="518.5933811812035" y="85" width="64.95790418835782" height="10" rx="3" fill="#5b8def"/>
-<line x1="518.5933811812035" y1="90" x2="659.6785131316801" y2="90" class="whisker"/>
-<line x1="518.5933811812035" y1="85" x2="518.5933811812035" y2="95" class="whisker"/>
-<line x1="659.6785131316801" y1="85" x2="659.6785131316801" y2="95" class="whisker"/>
+<rect x="537.7094814555683" y="86" width="119.19649640058537" height="8" rx="4" fill="#5b8def" opacity="0.35"/>
+<circle cx="591.8758616511593" cy="90" r="5" fill="#5b8def"/>
 <text x="800" y="95" class="value">1513</text>
 <text x="178" y="129" text-anchor="end" class="name">house-hunter</text>
 <rect x="190" y="117" width="600" height="14" rx="3" class="track"/>
-<rect x="488.3913693127787" y="119" width="72.11880398503138" height="10" rx="3" fill="#5b8def"/>
-<line x1="488.3913693127787" y1="124" x2="620.8810248542186" y2="124" class="whisker"/>
-<line x1="488.3913693127787" y1="119" x2="488.3913693127787" y2="129" class="whisker"/>
-<line x1="620.8810248542186" y1="119" x2="620.8810248542186" y2="129" class="whisker"/>
+<rect x="504.8809680201342" y="120" width="133.22364493708722" height="8" rx="4" fill="#5b8def" opacity="0.35"/>
+<circle cx="568.0057076848002" cy="124" r="5" fill="#5b8def"/>
 <text x="800" y="129" class="value">1471</text>
 <text x="178" y="163" text-anchor="end" class="name">house-random</text>
 <rect x="190" y="151" width="600" height="14" rx="3" class="track"/>
-<rect x="198.21151137993655" y="153" width="203.29887103809898" height="10" rx="3" fill="#5b8def"/>
-<line x1="198.21151137993655" y1="158" x2="460.92025850668125" y2="158" class="whisker"/>
-<line x1="198.21151137993655" y1="153" x2="198.21151137993655" y2="163" class="whisker"/>
-<line x1="460.92025850668125" y1="153" x2="460.92025850668125" y2="163" class="whisker"/>
+<rect x="198.50696964301068" y="154" width="277.98740838238854" height="8" rx="4" fill="#5b8def" opacity="0.35"/>
+<circle cx="403.28494780566814" cy="158" r="5" fill="#5b8def"/>
 <text x="800" y="163" class="value">1181</text>
 </svg></div>
 
